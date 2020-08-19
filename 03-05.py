@@ -24,7 +24,13 @@ class Robot:
         dt = drive_meas.dt
         # TODO: compute state (x,y,theta) from linear and angular velocity
         # ------------------------------------------
-        # ----------- Add your code here -----------
+        if angular_velocity == 0:
+		state[0] += dt * linear_velocity * np.cos(state[2])
+		state[1] += dt * linear_velocity * np.sin(state[2])
+	else if angular_velocity !=0:
+		ICR_R = linear_velocity / angular_velocity
+		state[0] += ICR_R * (-np.sin(state[2]) + np.sin(state[2]))
+		state[1] += ICR_R * (np.cos(state[2]) - np.sin(state[2]))
         # ------------------------------------------
 
     def measure(self, markers, idx_list):
